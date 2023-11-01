@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}my site{% endblock title %}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+<body>
+  <header>
+     {% block header %}
+      <h1>header</h1>
+    {% endblock %}  
+  </header>    
+  
+  <main>
+    {% block body %}
+      <p>body</p>
+    {% endblock body %}
+  </main>
+  
+  <footer>
+    {% block footer %}
+      <p>footer</p>
+    {% endblock %}
+  </footer>
+</body>
+
+</html>

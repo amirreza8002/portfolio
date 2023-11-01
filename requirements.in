@@ -1,0 +1,5 @@
+pip-tools
+django
+django-allauth
+black
+ruff
