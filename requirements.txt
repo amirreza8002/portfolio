@@ -28,7 +28,12 @@ django==4.2.6
     # via
     #   -r requirements.in
     #   django-allauth
+    #   django-taggit
 django-allauth==0.58.1
+    # via -r requirements.in
+django-autoslug==1.9.9
+    # via -r requirements.in
+django-taggit==5.0.1
     # via -r requirements.in
 idna==3.4
     # via requests

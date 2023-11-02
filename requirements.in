@@ -3,3 +3,5 @@ django
 django-allauth
 black
 ruff
+django-autoslug
+django-taggit
