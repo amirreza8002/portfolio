@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # local
     "accounts.apps.AccountsConfig",
+    "posts.apps.PostsConfig",
     # allauth
     "allauth",
     "allauth.account",
+    # taggit
+    "taggit",
 ]
 
 MIDDLEWARE = [
@@ -153,3 +156,7 @@ ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+
+
+# taggit settings
+TAGGIT_CASE_INSENSITIVE = True
