@@ -1,0 +1,27 @@
+{% extends "_base.html" %}
+
+{% block title %}posts{% endblock %}
+
+{% block header %}
+  <h1>Blog</h1>
+{% endblock %}
+
+{% block body %}
+	<div class="posts">
+    {% for post in posts %}
+      <small>{{ post.author.username }}</small>
+      <small>{{ post.published_date }}</small>
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.body|linebreaks }}</p>
+      <p>tags:</p>
+      {% for tag in post.tags.all %}
+        <p>{{ tag }}</p>
+      {% endfor %}
+
+    {% endfor %}
+
+  </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
