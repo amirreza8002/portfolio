@@ -1,0 +1,25 @@
+{% extends '_base.html' %}
+
+{% block body %}
+	{% if lists %}
+		<h3>All my lists</h3>
+	{% endif %}
+
+  <ul>
+    {% for list in lists %}
+      <li>
+        <div>
+          <a href="{% url 'todo_item_list' list.id %}">{{ list.title }}</a>
+        </div>
+      </li>
+    {% empty %}
+      <h4>no todo lists at the moment</h4>
+    {% endfor %}
+  </ul>
+
+  <p>
+  {% if user.is_authenticated %}
+    <button type="button" onclick="location.href='{% url 'list_add' %}'">Add a new list</button>
+  {% endif %}
+  </p>
+{% endblock %}

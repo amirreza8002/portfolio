@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # local
     "accounts.apps.AccountsConfig",
     "posts.apps.PostsConfig",
+    "todos.apps.TodosConfig",
     # allauth
     "allauth",
     "allauth.account",
@@ -137,12 +138,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # custom user model
 AUTH_USER_MODEL = "accounts.CustomUser"
 
-# login url
-LOGIN_URL = "account_login"
-
-# login logout redirect
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "logged_out"
 
 # allauth settings
 SITE_ID = 1
@@ -153,7 +148,7 @@ AUTHENTICATION_BACKENDS = [
 
 ACCOUNT_SIGNUP_PASSWORD_TWICE = False
 ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_AUTHENTICATION_METHOD = "username"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 

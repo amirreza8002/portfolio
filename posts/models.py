@@ -19,11 +19,11 @@ class Post(models.Model):
 
     class Meta:
         ordering = ["-published_date"]
-        indexes = [
-            models.Index(fields=["-published_date"])
-        ]
+        indexes = [models.Index(fields=["-published_date"])]
 
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_("author"))
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_("author")
+    )
     title = models.CharField(verbose_name=_("title"), max_length=255)
     slug = AutoSlugField(verbose_name=_("slug"), populate_from="title", unique=True)
     body = models.TextField(verbose_name=_("body"))
@@ -31,8 +31,12 @@ class Post(models.Model):
         max_length=10, choices=Status.choices, default=Status.DRAFT
     )
 
-    created_date = models.DateTimeField(verbose_name=_("created date"), auto_now_add=True)
-    published_date = models.DateTimeField(verbose_name=_("published date"), default=timezone.now)
+    created_date = models.DateTimeField(
+        verbose_name=_("created date"), auto_now_add=True
+    )
+    published_date = models.DateTimeField(
+        verbose_name=_("published date"), default=timezone.now
+    )
     updated_date = models.DateTimeField(verbose_name=_("updated date"), auto_now=True)
 
     objects = models.Manager()

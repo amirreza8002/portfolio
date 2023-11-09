@@ -1,0 +1,36 @@
+{% extends '_base.html' %}
+
+{% block body %}
+	<div>
+    <div>
+      <div>
+        <h5>{{ todo_list.title | upper }}</h5>
+      </div>
+      <ul>
+        {% for item in items %}
+        	<li>
+          <div>
+            {% if user.is_authenticated %}
+               <div>
+                 <a href="{% url 'item_update' todo_list.id item.id %}">{{ item.title }}</a> {{ item.done }}
+              </div>
+            {% else %}
+              <div>
+              {{ item.title }}
+              </div>
+            {% endif %}
+          </div>
+          </li>
+        {% empty %}
+          <p>There is nothing in list.</p>
+        {% endfor %}
+      </ul>
+      <p>
+        {% if  user.is_authenticated %}
+          <button type="button" onclick="location.href='{% url 'item_add' todo_list.id %}'">Add a new item</button>
+          <button type="button" onclick="location.href='{% url 'list_delete' todo_list.id %}'">Delete this list</button>
+        {% endif %}
+      </p>
+    </div>
+  </div>
+{% endblock %}
