@@ -11,22 +11,36 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
+env = environ.Env(
+    DEBUG=(bool, False),
+    GITHUB_TOKEN=(str, None),
+    SECRET_KEY=(str, "django-insecure-=^m&nv9fl8m3*-t1hbm+))w(adw7robl#w_$=9+0h01_mfv*^d"),
+    STATIC_BUILD=(bool, False),
+)
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-=^m&nv9fl8m3*-t1hbm+))w(adw7robl#w_$=9+0h01_mfv*^d"
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+# SECURITY WARNING: keep the secret key used in production secret!
+if not DEBUG:
+    SECRET_KEY = "very secure"
+    ALLOWED_HOSTS = ["*"]
+else:
+    SECRET_KEY = env("SECRET_KEY")
+    ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
+STATIC_BUILD = env("STATIC_BUILD")
+TIMEOUT_PERIOD = 5
+GITHUB_TOKEN = env("GITHUB_TOKEN")
 
 # Application definition
 
@@ -38,6 +52,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # local
+    "pages.apps.PagesConfig",
     "accounts.apps.AccountsConfig",
     "posts.apps.PostsConfig",
     "todos.apps.TodosConfig",
@@ -46,6 +61,8 @@ INSTALLED_APPS = [
     "allauth.account",
     # taggit
     "taggit",
+    # bulma
+    "django_simple_bulma",
 ]
 
 MIDDLEWARE = [
@@ -155,3 +172,13 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 # taggit settings
 TAGGIT_CASE_INSENSITIVE = True
+
+# bulma
+STATICFILES_FINDERS = [
+  # First add the two default Finders, since this will overwrite the default.
+  'django.contrib.staticfiles.finders.FileSystemFinder',
+  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+
+  # Now add our custom SimpleBulma one.
+  'django_simple_bulma.finders.SimpleBulmaFinder',
+]

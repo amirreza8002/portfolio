@@ -1,0 +1,28 @@
+#projects .section {
+    padding: 3rem 3rem;
+}
+
+#projects .container {
+    flex-grow: 1;
+    margin: 0 auto;
+    position: relative;
+    width: auto;
+}
+
+#projects .is-size-1 {
+    font-size: 3rem !important;
+}
+
+#projects .columns.is-multiline {
+    flex-wrap: wrap;
+}
+
+#projects .column.is-one-third-desktop {
+    flex: none;
+    width: 33.3333%;
+}
+
+#projects .column.is-half-tablet {
+    flex: none;
+    width: 50%;
+}

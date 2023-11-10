@@ -17,6 +17,14 @@ urlpatterns = [
     path("list/add/", TodoListCreate.as_view(), name="list_add"),
     path("list/<int:pk>/delete/", TodoListDelete.as_view(), name="list_delete"),
     path("items/<int:list_id>/add/", TodoItemCreate.as_view(), name="item_add"),
-    path("items/<int:list_id>/update/<int:pk>/", TodoItemUpdate.as_view(), name="item_update"),
-    path("items/<int:list_id>/delete/<int:pk>/", TodoItemDelete.as_view(), name="item_delete"),
+    path(
+        "items/<int:list_id>/update/<int:pk>/",
+        TodoItemUpdate.as_view(),
+        name="item_update",
+    ),
+    path(
+        "items/<int:list_id>/delete/<int:pk>/",
+        TodoItemDelete.as_view(),
+        name="item_delete",
+    ),
 ]

@@ -5,3 +5,6 @@ black
 ruff
 django-autoslug
 django-taggit
+django-environ
+httpx
+django-simple-bulma
