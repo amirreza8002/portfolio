@@ -7,7 +7,7 @@ class TodoList(models.Model):
     title = models.CharField(verbose_name=_("list title"), max_length=100, unique=True)
 
     def get_absolute_url(self):
-        return reverse("todolist_list", args=(self.id,))
+        return reverse("todo_list")
 
     def __str__(self):
         return self.title
