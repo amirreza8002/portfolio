@@ -47,9 +47,10 @@ else:
     ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 STATIC_BUILD = env("STATIC_BUILD")
-TIMEOUT_PERIOD = 5
 GITHUB_TOKEN = env("GITHUB_TOKEN")
 
+# github api timeout
+TIMEOUT_PERIOD = 5
 
 # https/ssl
 SECURE_SSL_REDIRECT = env("SECURE_SSL_REDIRECT")
@@ -75,6 +76,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # local
     "pages.apps.PagesConfig",
+    "projects.apps.ProjectsConfig",
     "accounts.apps.AccountsConfig",
     "posts.apps.PostsConfig",
     "todos.apps.TodosConfig",

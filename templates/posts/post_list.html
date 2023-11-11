@@ -5,15 +5,15 @@
 {% block body %}
 	<div class="posts">
     {% for post in posts %}
-      <small>{{ post.author.username }}</small>
-      <small>{{ post.published_date }}</small>
-      <h2>{{ post.title }}</h2>
-      <p>{{ post.body|linebreaks }}</p>
-      <p>tags:</p>
-      {% for tag in post.tags.all %}
-        <p>{{ tag }}</p>
-      {% endfor %}
-
+      <section>
+        <small>{{ post.published_date }}</small>
+        <h2><a style="text-decoration: none" href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h2>
+        <p>{{ post.body|linebreaks }}</p>
+        <p>tags:</p>
+        {% for tag in post.tags.all %}
+          <p>{{ tag }}</p>
+        {% endfor %}
+      </section>
     {% endfor %}
 
   </div>
