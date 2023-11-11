@@ -70,6 +70,10 @@ h1 {
     position: relative;
 }
 
+#projects .icon {
+    color: #4a4a4a;
+}
+
 #projects .repo-language-dot.python { background-color: #3572A5; }
 #projects .repo-language-dot.html { background-color: #e34c26; }
 #projects .repo-language-dot.css { background-color: #563d7c; }

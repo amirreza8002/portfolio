@@ -14,8 +14,9 @@
 <body>
   <header>
      {% block header %}
-       <h1><a style="text-decoration: none" href="{% url 'home' %}">Med</a></h1>
-       <p><a style="text-decoration: none" href="{% url 'todo_list' %}">Todo list</a> </p>
+       <h2><a style="text-decoration: none" href="{% url 'home' %}">Home</a></h2>
+       <h3><a style="text-decoration: none" href="{% url 'post_list' %}">Blog</a></h3>
+       <h4><a style="text-decoration: none" href="{% url 'todo_list' %}">Todo list</a> </h4>
     {% endblock %}  
   </header>    
   
