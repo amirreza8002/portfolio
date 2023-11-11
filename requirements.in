@@ -8,3 +8,6 @@ django-taggit
 django-environ
 httpx
 django-simple-bulma
+whitenoise
+django-debug-toolbar
+gunicorn

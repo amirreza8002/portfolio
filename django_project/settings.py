@@ -14,14 +14,22 @@ from pathlib import Path
 import os
 
 import environ
+import whitenoise.storage
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 env = environ.Env(
     DEBUG=(bool, False),
     GITHUB_TOKEN=(str, None),
     SECRET_KEY=(str, "django-insecure-=^m&nv9fl8m3*-t1hbm+))w(adw7robl#w_$=9+0h01_mfv*^d"),
     STATIC_BUILD=(bool, False),
+    SECURE_SSL_REDIRECT=(bool, True),
+    SECURE_HSTS_SECONDS=(int, 2592000),
+    SECURE_HSTS_INCLUDE_SUBDOMAINS=(bool, True),
+    SECURE_HSTS_PRELOAD=(bool, True),
+    SESSION_COOKIE_SECURE=(bool, True),
+    CSRF_COOKIE_SECURE=(bool, True),
 )
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 # Quick-start development settings - unsuitable for production
@@ -41,6 +49,20 @@ else:
 STATIC_BUILD = env("STATIC_BUILD")
 TIMEOUT_PERIOD = 5
 GITHUB_TOKEN = env("GITHUB_TOKEN")
+
+
+# https/ssl
+SECURE_SSL_REDIRECT = env("SECURE_SSL_REDIRECT")
+
+# HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = env("SECURE_HSTS_SECONDS")
+SECURE_HSTS_PRELOAD = env("SECURE_HSTS_PRELOAD")
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env("SECURE_HSTS_INCLUDE_SUBDOMAINS")
+
+# Secure Cookies
+SESSION_COOKIE_SECURE = env("SESSION_COOKIE_SECURE")
+CSRF_COOKIE_SECURE = env("CSRF_COOKIE_SECURE")
+
 
 # Application definition
 
@@ -63,10 +85,15 @@ INSTALLED_APPS = [
     "taggit",
     # bulma
     "django_simple_bulma",
+    # debug toolbar
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
+    "django.middleware.gzip.GZipMiddleware",
+    "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -74,6 +101,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",
 ]
 
 ROOT_URLCONF = "django_project.urls"
@@ -145,7 +174,14 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+STORAGES = {
+    "default": {
+        "BACKEND":"django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -182,3 +218,16 @@ STATICFILES_FINDERS = [
   # Now add our custom SimpleBulma one.
   'django_simple_bulma.finders.SimpleBulmaFinder',
 ]
+
+
+# debug toolbar setting
+if DEBUG:
+    INTERNAL_IPS = [
+        "127.0.0.1",
+    ]
+
+
+# cache settings
+CACHE_MIDDLEWARE_SECONDS = 604800
+CACHE_MIDDLEWARE_KEY_PREFIX = ""
+CACHE_MIDDLEWARE_ALIAS = "default"

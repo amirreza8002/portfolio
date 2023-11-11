@@ -6,25 +6,26 @@
       <div>
         <h5>{{ todo_list.title | upper }}</h5>
       </div>
-      <ul>
-        {% for item in items %}
-        	<li>
-          <div>
-            {% if user.is_authenticated %}
-               <div>
-                 <a href="{% url 'item_update' todo_list.id item.id %}">{{ item.title }}</a> {{ item.done }}
-              </div>
-            {% else %}
-              <div>
-              {{ item.title }}
-              </div>
-            {% endif %}
-          </div>
-          </li>
-        {% empty %}
-          <p>There is nothing in list.</p>
-        {% endfor %}
-      </ul>
+      <div>
+        <div>
+          <table>
+            <tr>
+              <th>todo</th>
+              <th style="width: 40rem">description</th>
+              <th>done</th>
+            </tr>
+          {% for item in items %}
+            <tr>
+              <td>{% if user.is_authenticated %}<a href="{% url 'item_update' todo_list.id item.id %}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</td>
+              <td>{{ item.description }}</td>
+              <td>{{ item.done }}</td>
+            </tr>
+          {% empty %}
+            <p>There is nothing in list.</p>
+          {% endfor %}
+          </table>
+        </div>
+      </div>
       <p>
         {% if  user.is_authenticated %}
           <button type="button" onclick="location.href='{% url 'item_add' todo_list.id %}'">Add a new item</button>
