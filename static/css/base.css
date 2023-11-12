@@ -11,6 +11,17 @@
     margin: 0 1.5rem 1rem 1.5rem;
 }
 
+.is-size-1 {
+    border-bottom: 0.05rem dashed;
+    border-bottom-color: #3f3f3f;
+    margin-bottom: 4rem;
+    padding-bottom: 0.3em;
+}
+
+.is-size-1:hover {
+    color: white;
+}
+
 .django-name:hover {
     color: darkgreen;
 }

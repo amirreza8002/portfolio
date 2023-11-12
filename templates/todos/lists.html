@@ -1,10 +1,7 @@
 {% extends '_base.html' %}
 
 {% block body %}
-	{% if lists %}
-		<h3>All my lists</h3>
-	{% endif %}
-
+  <h1 class="is-size-1">Todos</h1>
   <ul>
     {% for list in lists %}
       <li>
