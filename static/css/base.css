@@ -1,0 +1,16 @@
+.header_border-color, .footer_border_color {
+    border-bottom-color: #687cd1;
+    border-top-color: #687cd1;
+}
+
+.header_background_color:hover{
+    background-color: #292929;
+}
+
+.nav-link {
+    margin: 0 1.5rem 1rem 1.5rem;
+}
+
+.django-name:hover {
+    color: darkgreen;
+}

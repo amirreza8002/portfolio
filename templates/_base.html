@@ -9,16 +9,18 @@
     {% block links %}
     {% endblock %}
     <link rel="stylesheet" href="{% static 'css/simple.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
   </head>
 
 <body>
-  <header>
+  <header class="header_border-color header_background_color">
      {% block header %}
-       <nav>
-         <h4><a style="text-decoration: none" href="{% url 'home' %}">Home</a></h4>
-         <h4><a style="text-decoration: none" href="{% url 'post_list' %}">Blog</a></h4>
-         <h4><a style="text-decoration: none" href="{% url 'todo_list' %}">Todo list</a></h4>
-         <h4><a style="text-decoration: none" href="{% url 'projects' %}">Projects</a></h4>
+       <nav style="display: inline-flex">
+         <h4><a class="nav-link" href="{% url 'home' %}">Home</a></h4>
+         <h4><a class="nav-link" href="{% url 'post_list' %}">Blog</a></h4>
+         <h4><a class="nav-link" href="{% url 'projects' %}">Projects</a></h4>
+         <h4><a class="nav-link" href="{% url 'todo_list' %}">Todos</a></h4>
+         <h4><a class="nav-link" href="{% url 'about' %}">About</a></h4>
        </nav>
     {% endblock %}  
   </header>    
@@ -29,9 +31,11 @@
     {% endblock body %}
   </main>
   
-  <footer>
+  <footer class="footer_border_color">
     {% block footer %}
-      <p>built with django</p>
+      <div>
+        <p>built with <i class="django-name">django</i></p>
+      </div>
     {% endblock %}
   </footer>
 </body>
