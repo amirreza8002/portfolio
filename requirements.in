@@ -11,3 +11,5 @@ django-simple-bulma
 whitenoise
 django-debug-toolbar
 gunicorn
+django-tinymce
+psycopg[binary]

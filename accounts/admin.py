@@ -28,6 +28,7 @@ class CustomUserAdmin(UserAdmin):
                 },
             ),
         )
+        return fieldsets
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

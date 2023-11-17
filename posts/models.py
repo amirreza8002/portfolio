@@ -7,7 +7,7 @@ from autoslug import AutoSlugField
 from taggit.managers import TaggableManager
 
 
-class PublishedManage(models.Manager):
+class PublishedManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(status=Post.Status.PUBLISHED)
 
@@ -40,7 +40,7 @@ class Post(models.Model):
     updated_date = models.DateTimeField(verbose_name=_("updated date"), auto_now=True)
 
     objects = models.Manager()
-    published = PublishedManage()
+    published = PublishedManager()
     tags = TaggableManager(verbose_name=_("tags"))
 
     def __str__(self):

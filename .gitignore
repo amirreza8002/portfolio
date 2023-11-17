@@ -2,6 +2,8 @@
 .venv
 __pycache__/
 db.sqlite3
-ruff_cache/
+.ruff_cache/
 staticfiles
 .env
+data/
+docker_compose.yaml

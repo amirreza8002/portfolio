@@ -1,0 +1,23 @@
+.post-header {
+    color: teal;
+}
+.post-header:hover {
+    color: #008080DD;
+}
+
+.title-link {
+    text-decoration: none;
+}
+
+.title-link:hover {
+    color: #d49901;
+}
+
+.small-data {
+    font-size: 0.7rem;
+}
+
+.paragraph {
+    margin-bottom: 6rem;
+    font-size: 1.7rem;
+}

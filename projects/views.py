@@ -1,11 +1,14 @@
 import logging
 
 import httpx
+
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.views.generic import View
+from django.views.decorators.cache import cache_page
 
 from .models import RepositoryMetadata
 from django_project import settings
@@ -13,8 +16,10 @@ from django_project import settings
 log = logging.getLogger(__name__)
 
 
+@method_decorator(cache_page(694000), name="dispatch")
 class ProjectsView(View):
     """the main landing page of the website"""
+
     github_api = "https://api.github.com/users/amirreza8002/repos?per_page=100"
     repository_cache_ttl = 3600
 
@@ -82,16 +87,16 @@ class ProjectsView(View):
         # first off, load the timestamp of the least recently updated entry.
         if settings.STATIC_BUILD:
             last_update = None
-            print("static")
+            print("static build")
         else:
             last_update = (
                 RepositoryMetadata.objects.values_list("last_updated", flat=True)
-                .order_by("last_updated").first()
+                .order_by("last_updated")
+                .first()
             )
 
         # If we did not retrieve any results here, we should import them!
         if last_update is None:
-
             # Try to get new data from the API. If it fails, we'll return an empty list.
             # In this case, we simply don't display our projects on the site
             api_repositories = self._get_api_data()
@@ -103,7 +108,7 @@ class ProjectsView(View):
                     description=api_data["description"],
                     forks=api_data["forks_count"],
                     stargazers=api_data["stargazers_count"],
-                    language=api_data["language"]
+                    language=api_data["language"],
                 )
                 for api_data in api_repositories.values()
             ]
@@ -131,7 +136,7 @@ class ProjectsView(View):
                         "forks": api_data["forks_count"],
                         "stargazers": api_data["stargazers_count"],
                         "language": api_data["language"],
-                    }
+                    },
                 )
                 database_repositories.append(repo_data)
             return database_repositories

@@ -15,8 +15,7 @@ class RepositoryMetadata(models.Model):
         help_text=_("the full name of the repo, e.g. amirreza8002/projects"),
     )
     description = models.CharField(
-        max_length=400,
-        help_text=_("the description of the repo.")
+        max_length=400, help_text=_("the description of the repo.")
     )
     forks = models.IntegerField(
         help_text=_("the number of forks of this repo"),

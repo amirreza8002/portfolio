@@ -9,7 +9,7 @@ def post_list_view(request):
 
 
 def post_detail_view(request, slug):
-    post = Post.published.filter(slug=slug)
+    post = Post.published.get(slug=slug)
     if post:
         return render(request, "posts/post_detail.html", {"post": post})
     else:

@@ -26,6 +26,7 @@ urlpatterns = [
     path("projects/", include("projects.urls")),
     path("blog/", include("posts.urls")),
     path("todos/", include("todos.urls")),
+    path("tinymce/", include("tinymce.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

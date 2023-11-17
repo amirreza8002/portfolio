@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 
 import environ
-import whitenoise.storage
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
     DEBUG=(bool, False),
     GITHUB_TOKEN=(str, None),
-    SECRET_KEY=(str, "django-insecure-=^m&nv9fl8m3*-t1hbm+))w(adw7robl#w_$=9+0h01_mfv*^d"),
+    SECRET_KEY=(
+        str,
+        "django-insecure-=^m&nv9fl8m3*-t1hbm+))w(adw7robl#w_$=9+0h01_mfv*^d",
+    ),
     STATIC_BUILD=(bool, False),
     SECURE_SSL_REDIRECT=(bool, True),
     SECURE_HSTS_SECONDS=(int, 2592000),
@@ -31,7 +33,7 @@ env = environ.Env(
     SESSION_COOKIE_SECURE=(bool, True),
     CSRF_COOKIE_SECURE=(bool, True),
 )
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+environ.Env.read_env()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -39,7 +41,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 DEBUG = env("DEBUG")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-if not DEBUG:
+if DEBUG:
     SECRET_KEY = "very secure"
     ALLOWED_HOSTS = ["*"]
 else:
@@ -49,7 +51,7 @@ else:
 STATIC_BUILD = env("STATIC_BUILD")
 GITHUB_TOKEN = env("GITHUB_TOKEN")
 
-# github api timeout
+# GitHub api timeout
 TIMEOUT_PERIOD = 5
 
 # https/ssl
@@ -89,11 +91,12 @@ INSTALLED_APPS = [
     "django_simple_bulma",
     # debug toolbar
     "debug_toolbar",
+    # tinymce
+    "tinymce",
 ]
 
 MIDDLEWARE = [
     "django.middleware.gzip.GZipMiddleware",
-#    "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -104,7 +107,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-#    "django.middleware.cache.FetchFromCacheMiddleware",
 ]
 
 ROOT_URLCONF = "django_project.urls"
@@ -133,9 +135,13 @@ WSGI_APPLICATION = "django_project.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("POSTGRES_NAME"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "HOST": "db",
+        "PORT": 5432,
+    },
 }
 
 
@@ -161,9 +167,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "fa-ir"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Iran"
 
 USE_I18N = True
 
@@ -178,7 +184,7 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STORAGES = {
     "default": {
-        "BACKEND":"django.contrib.staticfiles.storage.StaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
@@ -186,8 +192,8 @@ STORAGES = {
 }
 
 # media
-MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
 
 
 # Default primary key field type
@@ -218,23 +224,18 @@ TAGGIT_CASE_INSENSITIVE = True
 
 # bulma
 STATICFILES_FINDERS = [
-  # First add the two default Finders, since this will overwrite the default.
-  'django.contrib.staticfiles.finders.FileSystemFinder',
-  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-
-  # Now add our custom SimpleBulma one.
-  'django_simple_bulma.finders.SimpleBulmaFinder',
+    # First add the two default Finders, since this will overwrite the default.
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    # Now add our custom SimpleBulma one.
+    "django_simple_bulma.finders.SimpleBulmaFinder",
 ]
 
 
 # debug toolbar setting
 if DEBUG:
-    INTERNAL_IPS = [
-        "127.0.0.1",
-    ]
+    import socket
 
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
 
-# cache settings
-# CACHE_MIDDLEWARE_SECONDS = 1
-# CACHE_MIDDLEWARE_KEY_PREFIX = ""
-# CACHE_MIDDLEWARE_ALIAS = "default"

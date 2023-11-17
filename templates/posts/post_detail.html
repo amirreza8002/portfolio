@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends '_base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}{{ post.title }}{% endblock %}
+{% block links %}<link rel="stylesheet" href="{% static 'css/posts/posts.css' %}">{% endblock %}
+
+{% block body %}
+  <h1 class="post-header">{{ post.title }}</h1>
+  <div class="paragraph">
+  	{{ post.body|linebreaks }}
+  </div>
+  <small class="small-data">{{ post.published_date }}</small><br>
+  <small class="small-data">tags:</small>
+  {% for tag in post.tags.all %}
+    <small class="small-data"><i>{{ tag }}</i></small>
+  {% endfor %}
+{% endblock %}
