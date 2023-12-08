@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
 def home(request):
@@ -7,3 +8,7 @@ def home(request):
 
 def about(request):
     return render(request, "pages/about.html")
+
+
+class RobotTxtView(TemplateView):
+    template_name = "pages/robots.txt"
