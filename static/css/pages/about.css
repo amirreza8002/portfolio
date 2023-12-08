@@ -1,0 +1,27 @@
+.about-para {
+    margin: 0.4rem;
+}
+
+.fa-telegram {
+    color: #229ED9;
+}
+
+.fa-discord {
+    color: #5865f2;
+}
+
+.fa-github {
+    color: white;
+}
+
+.fa-instagram {
+    color: #d62976;
+}
+
+.fab:hover {
+    color: #414141;
+}
+
+.footer_margin_bottom {
+    margin-bottom: 5rem;
+}

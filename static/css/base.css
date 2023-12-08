@@ -1,6 +1,10 @@
 .header_border-color, .footer_border_color {
-    border-bottom-color: #687cd1;
-    border-top-color: #687cd1;
+    border-bottom-color: #ff4400;
+    border-top-color: #ff4400;
+}
+.header_border-color:hover, .footer_border_color:hover {
+    border-bottom-color: #ba3500;
+    border-top-color: #ba3500;
 }
 
 .header_background_color:hover{
@@ -9,6 +13,11 @@
 
 .nav-link {
     margin: 0 1.5rem 1rem 1.5rem;
+}
+
+.nav-link:hover {
+    border-color: #687cd1;
+    color: #687cd1;
 }
 
 .is-size-1 {
@@ -22,6 +31,10 @@
     color: white;
 }
 
+.django-name, .django-name:visited {
+    color: #ababab;
+    text-decoration: none;
+}
 .django-name:hover {
     color: darkgreen;
 }
