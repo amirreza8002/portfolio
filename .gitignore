@@ -6,4 +6,4 @@ db.sqlite3
 staticfiles
 .env
 data/
-docker_compose.yaml
+docker-compose.yaml

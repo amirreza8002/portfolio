@@ -13,3 +13,5 @@ django-debug-toolbar
 gunicorn
 django-tinymce
 psycopg[binary]
+pytest-django
+coverage

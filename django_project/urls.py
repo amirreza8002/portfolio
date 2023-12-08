@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path("sohrab/", admin.site.urls),
+    path("admin/", admin.site.urls),
     #    path("accounts/", include("accounts.urls")),
     path("", include("pages.urls")),
     path("projects/", include("projects.urls")),
@@ -33,3 +33,19 @@ if settings.DEBUG:
     urlpatterns += [
         path("__debug__/", include("debug_toolbar.urls")),
     ]
+
+from django.contrib.sitemaps.views import sitemap
+
+from posts.sitemaps import PostSiteMap
+from projects.sitemaps import ProjectSiteMap
+from todos.sitemaps import TodoListSitemap, TodoItemSitemap
+
+sitemaps = {
+    "posts": PostSiteMap,
+#    "projects": ProjectSiteMap,
+#    "todos": (TodoListSitemap, TodoItemSitemap),
+}
+
+urlpatterns += [
+    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap")
+]
