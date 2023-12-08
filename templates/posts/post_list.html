@@ -11,7 +11,7 @@
       <section>
         <small class="small-data">{{ post.published_date }}</small>
         <h2><a class="title-link" href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h2>
-        <p>{{ post.body|linebreaks }}</p>
+        <p>{{ post.body|safe|linebreaks|truncatewords_html:15 }}</p>
         <samll>tags:</samll>
         {% for tag in post.tags.all %}
           <small style="color: slategrey">{{ tag }}</small>

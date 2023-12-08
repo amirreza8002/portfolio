@@ -7,7 +7,7 @@
 {% block body %}
   <h1 class="post-header">{{ post.title }}</h1>
   <div class="paragraph">
-  	{{ post.body|linebreaks }}
+  	{{ post.body|safe|linebreaks }}
   </div>
   <small class="small-data">{{ post.published_date }}</small><br>
   <small class="small-data">tags:</small>

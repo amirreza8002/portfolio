@@ -1,7 +1,42 @@
 {% extends '_base.html' %}
+{% load static %}
+{% load django_simple_bulma %}
 
 {% block title %}About{% endblock %}
 
+{% block links %}
+  {% font_awesome %}
+  {% bulma %}
+  <link rel="stylesheet" href="{% static 'css/pages/about.css' %}">
+{% endblock %}
+
 {% block body %}
-  <h1 class="is-size-1">About</h1>
+  <section class="section">
+    <div class="container">
+      <h1 class="is-size-1">About</h1>
+      <p class="about-apara">
+        Hello 🙌
+      </p>
+      <p class="about-para">
+        I'm Amirreza Sohrabi Far
+      </p>
+      <p class="about-para">
+        I am a software developer from Iran.
+      </p>
+      <p class="about-para">
+        My main focus is backend development with python.
+      </p>
+      <p class="about-para">
+        I'm mostly self taught. (ask me about my resources :p)
+      </p>
+      <p>
+        You can find me in:  <a href="https://www.instagram.com/a.r.sohrabi80/"><i class="fab fa-instagram"></i></a> - <a
+          href="https://github.com/amirreza8002"><i class="fab fa-github"></i></a> - <a href="https://t.me/ars_8002"><i
+          class="fab fa-telegram"></i></a>
+      </p>
+
+      <p>I'm also rather active in the python discord server: <a href="https://discord.gg/python"><i
+          class="fab fa-discord"></i></a></p>
+    </div>
+  </section>
 {% endblock %}

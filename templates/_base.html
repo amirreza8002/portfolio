@@ -5,7 +5,7 @@
   <head>
     <title>{% block title %}my site{% endblock title %}</title>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=1024" />
     {% block links %}
     {% endblock %}
     <link rel="stylesheet" href="{% static 'css/simple.css' %}">
@@ -22,22 +22,23 @@
          <h4><a class="nav-link" href="{% url 'todo_list' %}">Todos</a></h4>
          <h4><a class="nav-link" href="{% url 'about' %}">About</a></h4>
        </nav>
-    {% endblock %}  
-  </header>    
-  
+    {% endblock %}
+  </header>
+
   <main>
     {% block body %}
       <p>body</p>
     {% endblock body %}
   </main>
-  
-  <footer class="footer_border_color">
+
+  <footer class="footer_border_color footer_margin_bottom">
     {% block footer %}
       <div>
-        <p>built with <i class="django-name">django</i></p>
+        <p>built with <a class="django-name" href="https://www.djangoproject.com/"><i>django</i></a></p>
       </div>
     {% endblock %}
   </footer>
 </body>
 
 </html>
+

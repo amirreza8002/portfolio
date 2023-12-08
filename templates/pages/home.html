@@ -3,8 +3,13 @@
 
 {% block title %}Home{% endblock title %}
 
+{% block links %}
+  <link rel="stylesheet" href="{% static 'css/pages/home.css' %}">
+{% endblock %}
+
 {% block body %}
   <h1 class="is-size-1">Home</h1>
+  <p>hi, i'm <span class="name">amirreza</span></p>
   <p>this is supposed to be my portfolio :)</p>
-  
+
 {% endblock body %}
